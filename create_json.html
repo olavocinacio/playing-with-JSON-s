@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btn").click(function (e) {
+            var jsonData = {};
+
+            var formData = $("#myform").serializeArray();
+            // console.log(formData);
+
+            $.each(formData, function () {
+                if (jsonData[this.name]) {
+                    if (!jsonData[this.name].push) {
+                        jsonData[this.name] = [jsonData[this.name]];
+                    }
+                    jsonData[this.name].push(this.value || '');
+                } else {
+                    jsonData[this.name] = this.value || '';
+                }
+
+            });
+
+            console.log(jsonData);
+            // var fs = require('fs');
+            // fs.writeFile("thing.json", jsonData);
+            e.preventDefault();
+        });
+    });
+</script>
+<script src="create_json.js"></script>
+
+<body>
+    <form id="myform" type="post">
+        <fieldset>
+            <div class="elements">
+                <label for="name">Título :</label>
+                <input required="required" type="text" value="" name="title" size="20" />
+            </div>
+            <label for="name">Subtítulo :</label>
+            <input required="required" type="text" value="" name="subtitle" size="20" />
+            </div>
+            <label for="name">Corpo :</label>
+            <input required="required" type="text" value="" name="body" size="20" />
+            </div>
+            <div class="submit">
+                <input type="submit" id="btn" name="btn" class="btn" value="Submit" />
+            </div>
+        </fieldset>
+    </form>
+</body>
+
+<script src="./create_json.html"></script>
+
+
+</html>
